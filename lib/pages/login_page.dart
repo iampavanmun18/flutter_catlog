@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_catlog/pages/home_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String name = "";
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -14,8 +21,8 @@ class LoginPage extends StatelessWidget {
           Image.asset("../../assets/images/login_image.png",
               fit: BoxFit.contain),
           const SizedBox(height: 20),
-          const Text(
-            "Welcome",
+          Text(
+            "Welcome $name",
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
@@ -26,6 +33,10 @@ class LoginPage extends StatelessWidget {
                 TextFormField(
                   decoration: const InputDecoration(
                       hintText: "Enter Username", labelText: "Username"),
+                  onChanged: (value) {
+                    name = value;
+                    setState(() {});
+                  },
                 ),
                 TextFormField(
                   obscureText: true,
@@ -33,11 +44,15 @@ class LoginPage extends StatelessWidget {
                       hintText: "Enter Password", labelText: "Password"),
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(onPressed: () {
-                  print("Hi Pavan!!");
-                },
-                style: TextButton.styleFrom(),
-                child: Text("Login"))
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()));
+                    },
+                    style: TextButton.styleFrom(),
+                    child: Text("Login"))
               ],
             ),
           )
