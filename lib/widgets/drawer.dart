@@ -21,7 +21,8 @@ class MyDrawer extends StatelessWidget {
                 accountEmail: Text("Pavanpmundada5793@gmail.com"),
                 margin: EdgeInsets.zero,
                 currentAccountPicture: CircleAvatar(
-                  backgroundColor: Color.fromARGB(255, 104, 104, 230),
+                  backgroundImage:
+                      NetworkImage('../../assets/images/Icon-192.png'),
                 ),
               )),
           ListTile(
