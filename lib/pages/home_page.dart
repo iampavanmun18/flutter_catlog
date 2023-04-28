@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
+    await Future.delayed(Duration(seconds: 2));
     final catlogJson =
         await rootBundle.loadString('../../assets/files/catelog.json');
     final decodeData = jsonDecode(catlogJson);
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
         .map<Item>((item) => Item.fromMap(item))
         .toList();
     print(productsData);
-    setState(() {});
+    setState(() {}); //to re-render the page
   }
 
   @override
@@ -56,14 +57,18 @@ class _HomePageState extends State<HomePage> {
           // iconTheme: const IconThemeData(color: Colors.black),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(30),
-          child: ListView.builder(
-            itemCount: CatelogModel.items.length,
-            itemBuilder: (context, index) {
-              return ItemWidget(item: CatelogModel.items[index]);
-            },
-          ),
-        ),
+            padding: const EdgeInsets.all(30),
+            child:
+                (CatelogModel.items != null && CatelogModel.items!.isNotEmpty)
+                    ? ListView.builder(
+                        itemCount: CatelogModel.items?.length,
+                        itemBuilder: (context, index) {
+                          return ItemWidget(item: CatelogModel.items![index]);
+                        },
+                      )
+                    : const Center(
+                        child: CircularProgressIndicator(),
+                      )),
         drawer: const MyDrawer());
   }
 }
