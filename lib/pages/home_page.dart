@@ -27,6 +27,7 @@ class HomePage extends StatelessWidget {
           child: Column(children: [
             Text("Welcome to $days days of flutter by $name",
                 style: TextStyle(fontSize: 18)),
+            Image.network(imageUrl),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pop(
