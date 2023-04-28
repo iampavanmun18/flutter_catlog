@@ -1,5 +1,6 @@
 class CatelogModel {
- static final items = [ //we have given attached static because we can access items
+  static List<Item> items = [
+    //we have given attached static because we can access items
     Item(
         id: 1,
         name: "Iphone 12 Pro",
@@ -26,4 +27,15 @@ class Item {
       required this.price,
       required this.color,
       required this.image});
+
+  factory Item.fromMap(Map<String, dynamic> map) {
+   return Item(
+      id: map["id"],
+      name: map["name"],
+      desc: map["desc"],
+      price: map["price"],
+      color: map["color"],
+      image: map["image"],
+    );
+  }
 }

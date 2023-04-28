@@ -23,16 +23,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
-    final catlogJson = await rootBundle.loadString('../../assets/files/catelog.json');
+    final catlogJson =
+        await rootBundle.loadString('../../assets/files/catelog.json');
     final decodeData = jsonDecode(catlogJson);
     var productsData = decodeData["products"];
+    CatelogModel.items = List.from(productsData)
+        .map<Item>((item) => Item.fromMap(item))
+        .toList();
     print(productsData);
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final dummyList = List.generate(50, (index) => CatelogModel.items[0]);
-    print(dummyList);
+    // final dummyList = List.generate(50, (index) => CatelogModel.items[0]);
+    // print(dummyList);
 
     int days = 30;
     String name = "Pavan";
@@ -53,9 +58,9 @@ class _HomePageState extends State<HomePage> {
         body: Padding(
           padding: const EdgeInsets.all(30),
           child: ListView.builder(
-            itemCount: dummyList.length,
+            itemCount: CatelogModel.items.length,
             itemBuilder: (context, index) {
-              return ItemWidget(item: dummyList[index]);
+              return ItemWidget(item: CatelogModel.items[index]);
             },
           ),
         ),
