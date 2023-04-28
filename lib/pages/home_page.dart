@@ -1,12 +1,33 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_catlog/widgets/drawer.dart';
 import 'package:flutter_catlog/pages/login_page.dart';
 
 import '../models/catelogue.dart';
 import '../widgets/item_widget.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    final catlogJson = await rootBundle.loadString('../../assets/files/catelog.json');
+    final decodeData = jsonDecode(catlogJson);
+    var productsData = decodeData["products"];
+    print(productsData);
+  }
 
   @override
   Widget build(BuildContext context) {
