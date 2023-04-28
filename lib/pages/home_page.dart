@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_catlog/widgets/drawer.dart';
 import 'package:flutter_catlog/pages/login_page.dart';
 
+import '../models/catelogue.dart';
+import '../widgets/item_widget.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final dummyList = List.generate(50, (index) => CatelogModel.items[0]);
+    print(dummyList);
+
     int days = 30;
     String name = "Pavan";
     final imageUrl =
@@ -23,21 +29,35 @@ class HomePage extends StatelessWidget {
           ),
           // iconTheme: const IconThemeData(color: Colors.black),
         ),
-        body: Center(
-          child: Column(children: [
-            Text("Welcome to $days days of flutter by $name",
-                style: TextStyle(fontSize: 18)),
-            Image.network(imageUrl),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginPage()));
-                },
-                child: Text("Back Screen"))
-          ]),
+        body: Padding(
+          padding: const EdgeInsets.all(30),
+          child: ListView.builder(
+            itemCount: dummyList.length,
+            itemBuilder: (context, index) {
+              return ItemWidget(item: dummyList[index]);
+            },
+          ),
         ),
         drawer: const MyDrawer());
   }
 }
+
+
+//  Center(
+//           child: Column(children: [
+//             Text("Welcome to $days days of flutter by $name",
+//                 style: TextStyle(fontSize: 18)),
+//             Image.network(imageUrl),
+//             ListView.builder(itemCount: CatelogModel.items.length, itemBuilder: (context, index) {
+//               return ItemWidget(item: CatelogModel.items[index]);
+//             },),
+//             ElevatedButton(
+//                 onPressed: () {
+//                   Navigator.pop(
+//                       context,
+//                       MaterialPageRoute(
+//                           builder: (context) => const LoginPage()));
+//                 },
+//                 child: Text("Back Screen"))
+//           ]),
+//         ),
