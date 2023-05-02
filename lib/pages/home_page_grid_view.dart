@@ -57,24 +57,48 @@ class _HomePageGridState extends State<HomePageGrid> {
           // iconTheme: const IconThemeData(color: Colors.black),
         ),
         body: Padding(
-            padding: const EdgeInsets.all(30),
-            child:
-                (CatelogModel.items != null && CatelogModel.items!.isNotEmpty)
-                    ? Card(
-                        child: GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
-                          itemBuilder: (BuildContext context, int index) {
-                            final item = CatelogModel.items![index];
-                            return GridTile(child: Image.network(item.image));
-                          },
-                          itemCount: CatelogModel.items?.length,
-                        ),
-                      )
-                    : const Center(
-                        child: CircularProgressIndicator(),
-                      )),
+            padding: const EdgeInsets.all(15),
+            child: (CatelogModel.items != null &&
+                    CatelogModel.items!.isNotEmpty)
+                ? Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 16,
+                        crossAxisSpacing: 16,
+                      ),
+                      itemBuilder: (BuildContext context, int index) {
+                        final item = CatelogModel.items![index];
+                        return GridTile(
+                          header: Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: const BoxDecoration(color: Colors.red),
+                            child: Text(
+                              item.name,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          footer: Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: const BoxDecoration(color: Color.fromARGB(255, 5, 5, 5)),
+                            child: Text(
+                              item.price.toString(),
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          child: Image.network(item.image),
+                        );
+                      },
+                      itemCount: CatelogModel.items?.length,
+                    ),
+                  )
+                : const Center(
+                    child: CircularProgressIndicator(),
+                  )),
         drawer: const MyDrawer());
   }
 }
