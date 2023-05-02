@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_catlog/pages/home_page_grid_view.dart';
 import 'package:flutter_catlog/pages/login_page.dart';
 import 'package:shimmer/shimmer.dart';
 import '../pages/home_page.dart';
@@ -19,7 +20,7 @@ class _SplashState extends State<Splash> {
     Timer(
         const Duration(seconds: 2),
         () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const HomePage())));
+            MaterialPageRoute(builder: (context) => const HomePageGrid())));
   }
 
   @override

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_catlog/pages/home_page.dart';
 
+import 'home_page_grid_view.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -132,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
 
       // ignore: use_build_context_synchronously
       await Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const HomePage()));
+          context, MaterialPageRoute(builder: (context) => const HomePageGrid()));
       setState(() {
         changeButton = false;
       });
