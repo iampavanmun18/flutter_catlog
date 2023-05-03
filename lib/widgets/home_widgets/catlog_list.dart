@@ -20,7 +20,7 @@ class CatalogList extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => HomeDetailPage(
-                catalog: CatelogModel.getById(2), //get Item by ID
+                catalog: catalog, //get Item by ID
                 key: UniqueKey(),
               ),
             ),
