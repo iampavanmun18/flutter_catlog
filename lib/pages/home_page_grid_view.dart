@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_catlog/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../models/catelogue.dart';
-import 'home_widgets/catelog_header.dart';
-import 'home_widgets/catlog_list.dart';
+import '../widgets/home_widgets/catelog_header.dart';
+import '../widgets/home_widgets/catlog_list.dart';
 
 class HomePageGrid extends StatefulWidget {
   const HomePageGrid({super.key});
@@ -58,18 +58,5 @@ class _HomePageGridState extends State<HomePageGrid> {
             ),
           ),
         ));
-  }
-}
-
-class CatalogImage extends StatelessWidget {
-  final String image;
-
-  const CatalogImage({required Key? key, required this.image})
-      : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Image.network(
-      image,
-    ).box.rounded.p8.color(Mytheme.creamColor).make().p16().w40(context);
   }
 }

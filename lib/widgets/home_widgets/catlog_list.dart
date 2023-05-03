@@ -1,20 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_catlog/pages/home_details_page.dart';
+import 'package:flutter_catlog/widgets/themes.dart';
+
 import 'package:velocity_x/velocity_x.dart';
+
 import '../../models/catelogue.dart';
-import '../../widgets/themes.dart';
-import '../home_page_grid_view.dart';
+import 'catlog_image.dart';
 
 class CatalogList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: CatelogModel.items?.length,
+      itemCount: CatelogModel.items!.length,
       itemBuilder: (context, index) {
         final catalog = CatelogModel.items![index];
-        return CatalogItem(
-          catalog: catalog,
-          key: null,
+        return InkWell(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeDetailPage(
+                catalog: catalog,
+                key: UniqueKey(),
+              ),
+            ),
+          ),
+          child: CatalogItem(catalog: catalog),
         );
       },
     );
@@ -24,17 +35,21 @@ class CatalogList extends StatelessWidget {
 class CatalogItem extends StatelessWidget {
   final Item catalog;
 
-  const CatalogItem({required Key? key, required this.catalog})
-      : super(key: key);
+  const CatalogItem({Key? key, required this.catalog})
+      : assert(catalog != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return VxBox(
       child: Row(
         children: [
-          CatalogImage(
-            image: catalog.image,
-            key: null,
+          Hero(
+            tag: Key(catalog.id.toString()),
+            child: CatalogImage(
+              image: catalog.image,
+              key: null,
+            ),
           ),
           Expanded(
               child: Column(
@@ -58,7 +73,7 @@ class CatalogItem extends StatelessWidget {
                         shape: MaterialStateProperty.all(
                           StadiumBorder(),
                         )),
-                    child: "Buy".text.make(),
+                    child: "Add to cart".text.make(),
                   )
                 ],
               ).pOnly(right: 8.0)
