@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_catlog/pages/home_page.dart';
 
 import 'home_page_grid_view.dart';
 
