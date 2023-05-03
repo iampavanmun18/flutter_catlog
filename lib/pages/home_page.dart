@@ -17,13 +17,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     loadData();
   }
 
   loadData() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     final catlogJson =
         await rootBundle.loadString('../../assets/files/catelog.json');
     final decodeData = jsonDecode(catlogJson);
@@ -72,23 +71,3 @@ class _HomePageState extends State<HomePage> {
         drawer: const MyDrawer());
   }
 }
-
-
-//  Center(
-//           child: Column(children: [
-//             Text("Welcome to $days days of flutter by $name",
-//                 style: TextStyle(fontSize: 18)),
-//             Image.network(imageUrl),
-//             ListView.builder(itemCount: CatelogModel.items.length, itemBuilder: (context, index) {
-//               return ItemWidget(item: CatelogModel.items[index]);
-//             },),
-//             ElevatedButton(
-//                 onPressed: () {
-//                   Navigator.pop(
-//                       context,
-//                       MaterialPageRoute(
-//                           builder: (context) => const LoginPage()));
-//                 },
-//                 child: Text("Back Screen"))
-//           ]),
-//         ),

@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_catlog/widgets/drawer.dart';
-import 'package:flutter_catlog/pages/login_page.dart';
 import 'package:flutter_catlog/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -39,32 +37,112 @@ class _HomePageGridState extends State<HomePageGrid> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      // themeMode: ThemeMode.dark, // add dark theme
-      // theme: ThemeData(primarySwatch: Colors.blue),
-      // darkTheme: ThemeData(brightness: Brightness.dark),
-      // debugShowCheckedModeBanner: false,
-      body: SafeArea(
-        child: CatelogHeader(),
-      ),
+    return Scaffold(
+        backgroundColor: Mytheme.creamColor,
+        body: SafeArea(
+          child: Container(
+            padding: Vx.m32,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CatalogHeader(),
+                if (CatelogModel.items != null &&
+                    CatelogModel.items!.isNotEmpty)
+                  CatalogList().expand()
+                else
+                  const Center(
+                    child: CircularProgressIndicator(),
+                  )
+              ],
+            ),
+          ),
+        ));
+  }
+}
+
+class CatalogHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        "Catalog App".text.xl5.bold.color(Mytheme.darkbluishColor).make(),
+        "Trending products".text.xl2.make(),
+      ],
     );
   }
 }
 
-class CatelogHeader extends StatelessWidget {
-  const CatelogHeader({super.key});
+class CatalogList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: CatelogModel.items?.length,
+      itemBuilder: (context, index) {
+        final catalog = CatelogModel.items![index];
+        return CatalogItem(catalog: catalog, key: null,);
+      },
+    );
+  }
+}
+
+class CatalogItem extends StatelessWidget {
+  final Item catalog;
+
+  const CatalogItem({required Key ? key, required this.catalog})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: Vx.m32,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return VxBox(
+      child: Row(
         children: [
-          "Catelog App".text.xl5.bold.color(Mytheme.darkbluishColor).make(),
-          "Trending Products".text.make(),
+          CatalogImage(
+            image: catalog.image, key: null,
+          ),
+          Expanded(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              catalog.name.text.lg.color(Mytheme.darkbluishColor).bold.make(),
+              catalog.desc.text.textStyle(context.captionStyle).make(),
+              10.heightBox,
+              ButtonBar(
+                alignment: MainAxisAlignment.spaceBetween,
+                buttonPadding: EdgeInsets.zero,
+                children: [
+                  "\$${catalog.price}".text.bold.xl.make(),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                          Mytheme.darkbluishColor,
+                        ),
+                        shape: MaterialStateProperty.all(
+                          StadiumBorder(),
+                        )),
+                    child: "Buy".text.make(),
+                  )
+                ],
+              ).pOnly(right: 8.0)
+            ],
+          ))
         ],
       ),
-    );
+    ).white.rounded.square(150).make().py16();
+  }
+}
+
+class CatalogImage extends StatelessWidget {
+  final String image;
+
+  const CatalogImage({required Key ? key, required this.image}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Image.network(
+      image,
+    ).box.rounded.p8.color(Mytheme.creamColor).make().p16().w40(context);
   }
 }
