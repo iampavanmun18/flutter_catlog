@@ -2,9 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_catlog/pages/home_page_grid_view.dart';
-import 'package:flutter_catlog/pages/login_page.dart';
 import 'package:shimmer/shimmer.dart';
-import '../pages/home_page.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});

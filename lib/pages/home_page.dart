@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_catlog/widgets/drawer.dart';
-import 'package:flutter_catlog/pages/login_page.dart';
 
 import '../models/catelogue.dart';
 import '../widgets/item_widget.dart';

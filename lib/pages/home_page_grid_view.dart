@@ -50,8 +50,8 @@ class _HomePageGridState extends State<HomePageGrid> {
                     CatelogModel.items!.isNotEmpty)
                   CatalogList().expand()
                 else
-                  const Center(
-                    child: CircularProgressIndicator(),
+                  Center(
+                    child: CircularProgressIndicator().centered().expand(),
                   )
               ],
             ),
@@ -81,7 +81,10 @@ class CatalogList extends StatelessWidget {
       itemCount: CatelogModel.items?.length,
       itemBuilder: (context, index) {
         final catalog = CatelogModel.items![index];
-        return CatalogItem(catalog: catalog, key: null,);
+        return CatalogItem(
+          catalog: catalog,
+          key: null,
+        );
       },
     );
   }
@@ -90,7 +93,7 @@ class CatalogList extends StatelessWidget {
 class CatalogItem extends StatelessWidget {
   final Item catalog;
 
-  const CatalogItem({required Key ? key, required this.catalog})
+  const CatalogItem({required Key? key, required this.catalog})
       : super(key: key);
 
   @override
@@ -99,7 +102,8 @@ class CatalogItem extends StatelessWidget {
       child: Row(
         children: [
           CatalogImage(
-            image: catalog.image, key: null,
+            image: catalog.image,
+            key: null,
           ),
           Expanded(
               child: Column(
@@ -138,7 +142,8 @@ class CatalogItem extends StatelessWidget {
 class CatalogImage extends StatelessWidget {
   final String image;
 
-  const CatalogImage({required Key ? key, required this.image}) : super(key: key);
+  const CatalogImage({required Key? key, required this.image})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Image.network(
