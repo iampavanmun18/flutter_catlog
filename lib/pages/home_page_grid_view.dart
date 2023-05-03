@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_catlog/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 import '../models/catelogue.dart';
-import '../widgets/item_widget.dart';
+import 'home_widgets/catelog_header.dart';
+import 'home_widgets/catlog_list.dart';
 
 class HomePageGrid extends StatefulWidget {
   const HomePageGrid({super.key});
@@ -51,91 +51,13 @@ class _HomePageGridState extends State<HomePageGrid> {
                   CatalogList().expand()
                 else
                   Center(
-                    child: CircularProgressIndicator().centered().expand(),
+                    child:
+                        const CircularProgressIndicator().centered().expand(),
                   )
               ],
             ),
           ),
         ));
-  }
-}
-
-class CatalogHeader extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        "Catalog App".text.xl5.bold.color(Mytheme.darkbluishColor).make(),
-        "Trending products".text.xl2.make(),
-      ],
-    );
-  }
-}
-
-class CatalogList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: CatelogModel.items?.length,
-      itemBuilder: (context, index) {
-        final catalog = CatelogModel.items![index];
-        return CatalogItem(
-          catalog: catalog,
-          key: null,
-        );
-      },
-    );
-  }
-}
-
-class CatalogItem extends StatelessWidget {
-  final Item catalog;
-
-  const CatalogItem({required Key? key, required this.catalog})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return VxBox(
-      child: Row(
-        children: [
-          CatalogImage(
-            image: catalog.image,
-            key: null,
-          ),
-          Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              catalog.name.text.lg.color(Mytheme.darkbluishColor).bold.make(),
-              catalog.desc.text.textStyle(context.captionStyle).make(),
-              10.heightBox,
-              ButtonBar(
-                alignment: MainAxisAlignment.spaceBetween,
-                buttonPadding: EdgeInsets.zero,
-                children: [
-                  "\$${catalog.price}".text.bold.xl.make(),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                          Mytheme.darkbluishColor,
-                        ),
-                        shape: MaterialStateProperty.all(
-                          StadiumBorder(),
-                        )),
-                    child: "Buy".text.make(),
-                  )
-                ],
-              ).pOnly(right: 8.0)
-            ],
-          ))
-        ],
-      ),
-    ).white.rounded.square(150).make().py16();
   }
 }
 
