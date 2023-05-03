@@ -14,13 +14,13 @@ class CatalogList extends StatelessWidget {
       shrinkWrap: true,
       itemCount: CatelogModel.items!.length,
       itemBuilder: (context, index) {
-        final catalog = CatelogModel.items![index];
+        final catalog = CatelogModel.getByPosition(index); //get Item by position
         return InkWell(
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => HomeDetailPage(
-                catalog: catalog,
+                catalog: CatelogModel.getById(2), //get Item by ID
                 key: UniqueKey(),
               ),
             ),
@@ -65,7 +65,11 @@ class CatalogItem extends StatelessWidget {
                 children: [
                   "\$${catalog.price}".text.bold.xl.make(),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Item Added to cart"),
+                      ));
+                    },
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                           Mytheme.darkbluishColor,
