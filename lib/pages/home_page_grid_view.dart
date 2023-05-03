@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_catlog/utils/routes.dart';
 import 'package:flutter_catlog/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../models/catelogue.dart';
@@ -38,6 +40,11 @@ class _HomePageGridState extends State<HomePageGrid> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.pushNamed(context, MyRoutes.cartRoute);
+            },
+            child: Icon(CupertinoIcons.cart)),
         backgroundColor: Mytheme.creamColor,
         body: SafeArea(
           child: Container(

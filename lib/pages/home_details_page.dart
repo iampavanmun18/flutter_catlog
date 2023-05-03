@@ -15,35 +15,31 @@ class HomeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-            onPressed: () {
-             Navigator.pushNamed(context, MyRoutes.cartRoute);
-            },
-            child: Icon(CupertinoIcons.cart)),
+
         appBar: AppBar(
           backgroundColor: Colors.white,
         ),
-        // bottomNavigationBar: Container(
-        //   color: Colors.white,
-        //   child: ButtonBar(
-        //     alignment: MainAxisAlignment.spaceBetween,
-        //     buttonPadding: EdgeInsets.zero,
-        //     children: [
-        //       "\$${catalog.price}".text.bold.xl4.red400.make(),
-        //       ElevatedButton(
-        //         onPressed: () {},
-        //         style: ButtonStyle(
-        //             backgroundColor: MaterialStateProperty.all(
-        //               Mytheme.darkbluishColor,
-        //             ),
-        //             shape: MaterialStateProperty.all(
-        //               StadiumBorder(),
-        //             )),
-        //         child: "Buy".text.make(),
-        //       ).wh(100, 50)
-        //     ],
-        //   ).p24(),
-        // ),
+        bottomNavigationBar: Container(
+          color: Colors.white,
+          child: ButtonBar(
+            alignment: MainAxisAlignment.spaceBetween,
+            buttonPadding: EdgeInsets.zero,
+            children: [
+              "\$${catalog.price}".text.bold.xl4.red400.make(),
+              ElevatedButton(
+                onPressed: () {},
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                      Mytheme.darkbluishColor,
+                    ),
+                    shape: MaterialStateProperty.all(
+                      StadiumBorder(),
+                    )),
+                child: "Buy".text.make(),
+              ).wh(100, 50)
+            ],
+          ).p24(),
+        ),
         body: SafeArea(
           child: Column(
             children: [
