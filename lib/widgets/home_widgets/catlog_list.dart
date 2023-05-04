@@ -91,24 +91,26 @@ class _AddToCart extends StatefulWidget {
 }
 
 class __AddToCartState extends State<_AddToCart> {
-  bool isAdded = false;
+  final _cart = CartModel();
 
   @override
   Widget build(BuildContext context) {
-    final _cart = CartModel();
+    bool isInCart = _cart.items.contains(widget.catalog);
     return ElevatedButton(
       onPressed: () {
-        isAdded = isAdded.toggle();
-        final _catalog = CatelogModel();
-        _cart.catalog = _catalog;
-        _cart.add(widget.catalog);
-        setState(() {});
+        if (!isInCart) {
+          isInCart = isInCart.toggle();
+          final _catalog = CatelogModel();
+          _cart.catalog = _catalog;
+          _cart.add(widget.catalog);
+          setState(() {});
+        }
       },
       style: ButtonStyle(
           shape: MaterialStateProperty.all(
         const StadiumBorder(),
       )),
-      child: isAdded ? const Icon(Icons.done) : "Add to cart".text.make(),
+      child: isInCart ? const Icon(Icons.done) : "Add to cart".text.make(),
     );
   }
 }

@@ -31,7 +31,7 @@ class _CartListTotal extends StatelessWidget {
   Widget build(BuildContext context) {
     final _cart = CartModel();
     return SizedBox(
-      height: 200,
+      height: 50,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -54,15 +54,20 @@ class __CartListState extends State<_CartList> {
   final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemBuilder: (context, index) => ListTile(
-              leading: const Icon(Icons.done),
-              trailing: IconButton(
-                icon: const Icon(Icons.remove_circle_outline),
-                onPressed: () => {},
-              ),
-              title: _cart.items[index].name.text.make(),
-            ),
-        itemCount: _cart.items.length);
+    return _cart.items.isEmpty
+        ? "Nothing to Show".text.xl5.make().centered()
+        : ListView.builder(
+            itemBuilder: (context, index) => ListTile(
+                  leading: const Icon(Icons.done),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.remove_circle_outline),
+                    onPressed: () => {
+                      _cart.remove(_cart.items[index]),
+                      setState(() {})
+                    }, // setState for rendering the UI in flutter (_cart.remove we have written inside cart.dart in Model folder)
+                  ),
+                  title: _cart.items[index].name.text.make(),
+                ),
+            itemCount: _cart.items.length);
   }
 }
