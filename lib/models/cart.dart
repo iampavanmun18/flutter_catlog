@@ -2,11 +2,11 @@ import 'package:flutter_catlog/models/catelogue.dart';
 
 class CartModel {
   //make singleton class for not making multiple objects so that addtocart won't start with zero everytime.
-  static final cartModel = CartModel._internal();
+  // static final cartModel = CartModel._internal();
 
-  CartModel._internal();
+  // CartModel._internal();
 
-  factory CartModel() => cartModel;
+  // factory CartModel() => cartModel;
   // catalog field
   late CatelogModel _catalog;
 

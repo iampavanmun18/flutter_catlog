@@ -1,10 +1,10 @@
 class CatelogModel {
   //make singleton class for not making multiple objects so that addtocart won't start with zero everytime.
-  static final catelogModel = CatelogModel._internal();
+  // static final catelogModel = CatelogModel._internal();
 
-  CatelogModel._internal();
+  // CatelogModel._internal();
 
-  factory CatelogModel() => catelogModel;
+  // factory CatelogModel() => catelogModel;
   static List<Item>? items = null;
 
 //get item by Id

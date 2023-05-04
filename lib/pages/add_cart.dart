@@ -15,7 +15,7 @@ class AddToCart extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const _CartList().p32().expand(),
+          CartList().p32().expand(),
           const Divider(),
           const _CartListTotal(),
         ],
@@ -43,14 +43,7 @@ class _CartListTotal extends StatelessWidget {
   }
 }
 
-class _CartList extends StatefulWidget {
-  const _CartList({super.key});
-
-  @override
-  State<_CartList> createState() => __CartListState();
-}
-
-class __CartListState extends State<_CartList> {
+class CartList extends StatelessWidget {
   final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
@@ -63,7 +56,6 @@ class __CartListState extends State<_CartList> {
                     icon: const Icon(Icons.remove_circle_outline),
                     onPressed: () => {
                       _cart.remove(_cart.items[index]),
-                      setState(() {})
                     }, // setState for rendering the UI in flutter (_cart.remove we have written inside cart.dart in Model folder)
                   ),
                   title: _cart.items[index].name.text.make(),
