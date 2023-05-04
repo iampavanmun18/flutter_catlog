@@ -1,13 +1,18 @@
 class CatelogModel {
+  //make singleton class for not making multiple objects so that addtocart won't start with zero everytime.
+  static final catelogModel = CatelogModel._internal();
+
+  CatelogModel._internal();
+
+  factory CatelogModel() => catelogModel;
   static List<Item>? items = null;
 
 //get item by Id
-   Item getById(int id) =>
-      items!.firstWhere((element) => element.id == id,
-          orElse: null); //to get element by matching  selected element with id
+  Item getById(int id) => items!.firstWhere((element) => element.id == id,
+      orElse: null); //to get element by matching  selected element with id
 
 //get item by position
-   Item getByPosition(int pos) => items![pos];
+  Item getByPosition(int pos) => items![pos];
 }
 
 class Item {
