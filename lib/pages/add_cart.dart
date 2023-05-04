@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_catlog/core/store.dart';
 import 'package:flutter_catlog/models/cart.dart';
 import 'package:flutter_catlog/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -29,7 +30,7 @@ class _CartListTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _cart = CartModel();
+    final CartModel _cart = (VxState.store as MyStore).cart;
     return SizedBox(
       height: 50,
       child: Row(
@@ -44,9 +45,10 @@ class _CartListTotal extends StatelessWidget {
 }
 
 class CartList extends StatelessWidget {
-  final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
+    VxState.watch(context, on: [RemoveMutation]);
+    final CartModel _cart = (VxState.store as MyStore).cart;
     return _cart.items.isEmpty
         ? "Nothing to Show".text.xl5.make().centered()
         : ListView.builder(
@@ -55,7 +57,7 @@ class CartList extends StatelessWidget {
                   trailing: IconButton(
                     icon: const Icon(Icons.remove_circle_outline),
                     onPressed: () => {
-                      _cart.remove(_cart.items[index]),
+                      RemoveMutation(_cart.items[index])
                     }, // setState for rendering the UI in flutter (_cart.remove we have written inside cart.dart in Model folder)
                   ),
                   title: _cart.items[index].name.text.make(),
