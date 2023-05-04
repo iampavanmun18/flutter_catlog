@@ -29,12 +29,13 @@ class _CartListTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _cart = CartModel();
     return SizedBox(
       height: 200,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          "\$999".text.xl5.make(),
+          "\$${_cart.totalPrice}".text.xl5.make(),
           TextButton(onPressed: () {}, child: "Buy".text.make())
         ],
       ),
@@ -60,7 +61,7 @@ class __CartListState extends State<_CartList> {
                 icon: const Icon(Icons.remove_circle_outline),
                 onPressed: () => {},
               ),
-              title: "Item1".text.make(),
+              title: _cart.items[index].name.text.make(),
             ),
         itemCount: _cart.items.length);
   }
