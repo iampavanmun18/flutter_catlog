@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_catlog/models/cart.dart';
 import 'package:flutter_catlog/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -49,6 +50,7 @@ class _CartList extends StatefulWidget {
 }
 
 class __CartListState extends State<_CartList> {
+  final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -60,6 +62,6 @@ class __CartListState extends State<_CartList> {
               ),
               title: "Item1".text.make(),
             ),
-        itemCount: 5);
+        itemCount: _cart.items.length);
   }
 }
