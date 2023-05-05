@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_catlog/core/store.dart';
+import 'package:flutter_catlog/models/cart.dart';
 import 'package:flutter_catlog/utils/routes.dart';
 import 'package:flutter_catlog/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -19,7 +21,7 @@ class HomePageGrid extends StatefulWidget {
 class _HomePageGridState extends State<HomePageGrid> {
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
     loadData();
   }
@@ -39,12 +41,25 @@ class _HomePageGridState extends State<HomePageGrid> {
 
   @override
   Widget build(BuildContext context) {
+    final CartModel _cart = (VxState.store as MyStore).cart;
+
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.pushNamed(context, MyRoutes.cartRoute);
-            },
-            child: Icon(CupertinoIcons.cart)),
+        appBar: AppBar(
+          title: "Home".text.textStyle(context.bodyLarge).make(),
+        ),
+        floatingActionButton: VxBuilder(
+          builder: (BuildContext context, store, VxStatus? status) =>
+              FloatingActionButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, MyRoutes.cartRoute);
+                  },
+                  child: Icon(CupertinoIcons.cart).badge(
+                      size: 20,
+                      color: Colors.red,
+                      count: _cart.items.length,
+                      textStyle: TextStyle(color: Colors.white, fontSize: 20))),
+          mutations: {AddMutation, RemoveMutation},
+        ),
         backgroundColor: Mytheme.creamColor,
         body: SafeArea(
           child: Container(
@@ -53,8 +68,7 @@ class _HomePageGridState extends State<HomePageGrid> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CatalogHeader(),
-                if (CatelogModel.items != null &&
-                    CatelogModel.items!.isNotEmpty)
+                if (CatelogModel.items != null && CatelogModel.items.isNotEmpty)
                   CatalogList().expand()
                 else
                   Center(

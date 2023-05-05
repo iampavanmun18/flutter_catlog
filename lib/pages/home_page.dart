@@ -56,17 +56,16 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Padding(
             padding: const EdgeInsets.all(30),
-            child:
-                (CatelogModel.items != null && CatelogModel.items!.isNotEmpty)
-                    ? ListView.builder(
-                        itemCount: CatelogModel.items?.length,
-                        itemBuilder: (context, index) {
-                          return ItemWidget(item: CatelogModel.items![index]);
-                        },
-                      )
-                    : const Center(
-                        child: CircularProgressIndicator(),
-                      )),
+            child: (CatelogModel.items != null && CatelogModel.items.isNotEmpty)
+                ? ListView.builder(
+                    itemCount: CatelogModel.items.length,
+                    itemBuilder: (context, index) {
+                      return ItemWidget(item: CatelogModel.items[index]);
+                    },
+                  )
+                : const Center(
+                    child: CircularProgressIndicator(),
+                  )),
         drawer: const MyDrawer());
   }
 }

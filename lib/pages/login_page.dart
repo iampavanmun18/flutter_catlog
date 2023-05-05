@@ -132,8 +132,8 @@ class _LoginPageState extends State<LoginPage> {
       await Future.delayed(Duration(seconds: 1));
 
       // ignore: use_build_context_synchronously
-      await Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const HomePageGrid()));
+      await Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const HomePageGrid()));
       setState(() {
         changeButton = false;
       });

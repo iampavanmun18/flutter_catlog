@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_catlog/pages/add_cart.dart';
 import 'package:flutter_catlog/utils/routes.dart';
 import 'package:flutter_catlog/widgets/themes.dart';
@@ -8,8 +9,13 @@ import 'pages/home_page.dart';
 import 'pages/login_page.dart';
 import 'pages/splash_page.dart';
 
-void main() => runApp(VxState(store: MyStore(),
-child: const MyApp())); // initiate MyApp as  StatelessWidget
+void main() => {
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.blue, // navigation bar color
+        statusBarColor: Colors.pink, // status bar color
+      )),
+      runApp(VxState(store: MyStore(), child: const MyApp()))
+    }; // initiate MyApp as  StatelessWidget
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
