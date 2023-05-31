@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_catlog/Video_Page/page5.dart';
+import 'package:flutter_catlog/Video_Page/page6_video.dart';
 import 'package:flutter_catlog/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter_catlog/models/catelogue.dart';
@@ -27,7 +27,7 @@ class HomeDetailPage extends StatelessWidget {
                 onPressed: () {
                  Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const ChewieAudioDemo()),
+                            MaterialPageRoute(builder: (context) => const page6_video()),
                           );                },
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
