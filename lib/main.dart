@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_catlog/pages/add_cart.dart';
+import 'package:flutter_catlog/pages/checkout_page.dart';
+import 'package:flutter_catlog/pages/razorpay.dart';
 import 'package:flutter_catlog/utils/routes.dart';
 import 'package:flutter_catlog/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -39,6 +41,8 @@ class MyApp extends StatelessWidget {
         MyRoutes.loginRoute: (context) => const LoginPage(),
         MyRoutes.homeRoute: (context) => const HomePage(),
         MyRoutes.cartRoute: (context) => const AddToCart(),
+        MyRoutes.checkoutPage: (context) => const CheckoutAddressPage(),
+        MyRoutes.razorpay: (context) => const MyHomePage(title: '',),
       },
     );
   }
