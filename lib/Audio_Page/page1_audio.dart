@@ -85,6 +85,8 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: AppBar(
+        title: const Text('Audio Page')),
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
